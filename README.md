@@ -6,20 +6,20 @@
 ![](img/index.png)
 
 
-## 项目数据库配置
+## 数据库配置
 
 1. 创建一个MySQL数据库 `database1`
 2. 在settings.py文件下配置好数据库信息
 3. 在程序根目录下执行 `python manage.py makemigrations`和 `python manage.py migrate`
 
 
-## 运行环境配置
+## 环境配置
 
 1. 确保你的python根目录下有与你Google浏览器版本匹配的`chromedriver.exe`
 2. 下载好所需要的依赖 `pip install -r requirements.txt`
 
 
-## 正确运行的步骤
+## 运行步骤
 
 1. 确保weibo_topic_spyder.py文件下的`username`、`password`，和analysis.py文件下的`APP_ID`、`API_KEY`填写正确
 2. 启动程序 `python manage.py runserver`
