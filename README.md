@@ -37,7 +37,6 @@
 
 ![](img/analysis1.png)
 ![](img/analysis2.png)
-![](img/analysis3.png)
 
 
 ### 数据下载
