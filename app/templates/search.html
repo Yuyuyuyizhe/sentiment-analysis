@@ -1,0 +1,216 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>微博超话情感分析系统</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'plugins/my/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'plugins/my/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+<body>
+  <h3 class="header center orange-text" id="bla">用于舆情监测的网络话题情感分析系统</h3>
+
+    <div class="card-panel center teal lighten-2 card-content black-text"><em><strong>{{ search }}</strong></em> 的总体分析结果 ...</div>
+    <div class="row">
+      <div class="center blue-text"></div>
+    </div>
+
+    <!-- Brief analysis  -->
+    <!-- *********************************** -->
+    <div class="container row">
+
+      <div class="col s4">
+          <div class="card green">
+              <div class="card-content white-text" style="word-wrap: break-word">
+                <span class="card-title center">积极</span>
+                <p class="center"> 结果: {{ percentage.0 }}%</p>
+              </div>
+          </div>
+      </div>
+      <div class="col s4">
+          <div class="card blue">
+              <div class="card-content white-text" style="word-wrap: break-word">
+                <span class="card-title center">中立</span>
+                <p class="center"> 结果: {{ percentage.1 }}%</p>
+              </div>
+          </div>
+      </div>
+      <div class="col s4">
+          <div class="card red">
+              <div class="card-content white-text" style="word-wrap: break-word">
+                <span class="card-title center">消极</span>
+                <p class="center"> 结果: {{ percentage.2 }}%</p>
+              </div>
+          </div>
+      </div>
+
+    </div>
+
+
+    <!--    charts-->
+    <div class="card-panel center teal lighten-2 card-content black-text"><em><strong>{{ search }}</strong></em> 的词频统计 ...</div>
+    <div class="row">
+      <div class="center blue-text"></div>
+    </div>
+
+    <div class="row container col s12 m12">
+        <div id="main" style="width: 100%;height:400px;"></div>
+    </div>
+
+
+
+    <!-- Verdict  -->
+    <!-- *********************************** -->
+    <div class="card-panel center teal lighten-2"><em><strong>{{ search }}</strong></em> 超话下最近10条内容 ...</div>
+    <div class="row">
+      <div class="center blue-text"></div>
+    </div>
+
+    <!-- Printing out all the tweets  -->
+    <!-- *********************************** -->
+    <div class="row container col s12 m12">
+
+    {% for dict in blogs %}
+
+     <div class="card {{ dict.color }}" >
+        <div class="card-content white-text">
+        <span class="card-title">{{ dict.username }}：</span>
+        <p>{{ dict.blog}}</p>
+        </div>
+    </div>
+
+    {% endfor %}
+
+    </div> 
+
+    <div class="container row center">
+      <a href="/download/" class="btn-large waves-effect waves-light orange modal-trigger tooltipped" data-position="left" data-delay="50" data-tooltip="点击下载全部数据">下载</a>
+      <a href="/index/" id="download-button" class="btn-large waves-effect waves-light orange tooltipped" data-position="right" data-delay="50" data-tooltip="点击返回重新分析">重新分析</a>
+    </div>
+    <br><br>
+
+    <div id="download" class="modal">
+      <div class="modal-content">
+        <h4>正在下载全部数据</h4>
+        <p>可用于您的研究</p>
+      </div>
+    </div>
+
+
+  <!-- 页尾 -->
+  <footer class="page-footer orange">
+    <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">关于我</h5>
+                <p class="grey-text text-lighten-4">目前就读于湖北大学计算机与信息工程学院、楚才学院，主修数据科学与大数据技术专业，辅修应用统计方向。对人工智能、机器学习领域很感兴趣。如有问题，可通过右方的联系方式联系我。</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">与我联系</h5>
+                <div>
+                <ul>
+                  <li class="grey-text text-lighten-3">Email: 1403814258@qq.com</li>
+                  <li class="grey-text text-lighten-3">Weibo: weibo.com/u/6188328552</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <p>Made by Yizhe</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'plugins/my/js/materialize.js' %}"></script>
+  <script src="{% static 'plugins/my/js/init.js' %}"></script>
+
+  <script src="{% static 'js/echarts.js' %}"></script>
+  <script type="text/javascript">
+
+      $(function(){
+        initBar();
+      })
+
+      function initBar(){
+          var myChart = echarts.init(document.getElementById('main'));
+
+          var option = {
+              tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                type: 'shadow'
+                }
+              },
+              grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+              },
+              xAxis:
+                 {
+                    type: 'category',
+                    data: [],
+                    axisTick: {
+                      alignWithLabel: true
+                    }
+                 }
+              ,
+              yAxis: [
+                {
+                  type: 'value'
+                }
+              ],
+              series: {
+                  name: '词频',
+                  type: 'bar',
+                  barWidth: '60%',
+                  data: []
+
+              }
+          };
+
+          $.ajax({
+              url:"/bar/",
+              type:"get",
+              dataType:"JSON",
+              success:function(res){
+                  if(res.status){
+                      option.xAxis.data = res.data.word;
+                      option.series.data = res.data.count;
+
+                      myChart.setOption(option);
+
+                  }
+              }
+          })
+
+
+      }
+
+</script>
+
+  <script type="text/javascript">
+
+      $(document).ready(function(){
+        $('.modal').modal();
+        });
+      
+  </script>
+
+  </body>
+</html>
+

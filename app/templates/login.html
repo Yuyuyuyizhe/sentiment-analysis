@@ -1,0 +1,80 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>微博超话情感分析系统</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'plugins/my/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'plugins/my/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+<body bgcolor="orange">
+
+
+<br><br>
+
+  <div class="container">
+      <h3 class="mainHeading center white-text">用于舆情监测的网络话题情感分析系统</h3>
+
+      <div class="container col s12 m12">
+        <div class="card-panel white lighten-4 card-content black-text">
+          <h5 class="orange-text">用户登录</h5>
+          <br>
+          <form method="POST" action="/login/" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+              <label>{{ field.label }}</label>
+              {{ field }}
+              <span style="color:red;">{{ field.errors.0 }}</span>
+              <br><br>
+            {% endfor %}
+            <div class="row center">
+              <input type='submit' value='登录' class="btn-large waves-effect waves-light orange tooltipped padbutton" data-position="bottom" data-delay="50" data-tooltip="点击登录">
+            </div>
+          </form>
+        </div>
+
+      </div>
+  </div>
+
+<br><br>
+
+  <!-- 页尾 -->
+  <footer class="page-footer orange">
+    <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">关于我</h5>
+                <p class="grey-text text-lighten-4">目前就读于湖北大学计算机与信息工程学院、楚才学院，主修数据科学与大数据技术专业，辅修应用统计方向。对人工智能、机器学习领域很感兴趣。如有问题，可通过右方的联系方式联系我。</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">与我联系</h5>
+                <div>
+                <ul>
+                  <li class="grey-text text-lighten-3">Email: 1403814258@qq.com</li>
+                  <li class="grey-text text-lighten-3">Weibo: weibo.com/u/6188328552</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <p>Made by Yizhe</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'plugins/my/js/materialize.js' %}"></script>
+  <script src="{% static 'plugins/my/js/init.js' %}"></script>
+
+  </body>
+</html>

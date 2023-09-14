@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>微博超话情感分析系统</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="{% static 'plugins/my/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'plugins/my/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+
+  <!-- Main form - Action area -->
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <br><br>
+      <h3 class="mainHeading center orange-text">用于舆情监测的网络话题情感分析系统</h3>
+      <br>
+      <div class="input-field col s6">
+         <!-- Search 按钮 -->
+         <form method="POST" action="/search/"> 
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="row center need-space" >
+              <input type='submit' value='分析' id="download-button" class="btn-large waves-effect waves-light orange tooltipped padbutton" data-position="bottom" data-delay="50" data-tooltip="点此分析">
+            </div>
+         </form>
+         
+      </div>
+      
+      <br><br>
+
+    </div>
+  </div>
+
+  <!-- 三个图标 -->
+  <div class="container">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">search</i></h2>
+            <h5 class="center">搜索</h5>
+
+            <p class="light">搜索您想分析的网络热门话题或关键词</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">pie_chart</i></h2>
+            <h5 class="center">分析</h5>
+
+            <p class="light">自动解析出互联网上与话题有关的近100条讨论数据。话题讨论内容的情感倾向将被划分为积极、消极或中立</p>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><i class="material-icons">file_download</i></h2>
+            <h5 class="center">下载</h5>
+            <p class="light">下载全部的数据及各自的分析结果，以用于您的研究</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <br><br>
+  </div>
+
+
+  <!-- 页尾 -->
+  <footer class="page-footer orange">
+    <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">关于我</h5>
+                <p class="grey-text text-lighten-4">目前就读于湖北大学计算机与信息工程学院、楚才学院，主修数据科学与大数据技术专业，辅修应用统计方向。对人工智能、机器学习领域很感兴趣。如有问题，可通过右方的联系方式联系我。</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">与我联系</h5>
+                <div>
+                <ul>
+                  <li class="grey-text text-lighten-3">Email: 1403814258@qq.com</li>
+                  <li class="grey-text text-lighten-3">Weibo: weibo.com/u/6188328552</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <p>Made by Yizhe</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'plugins/my/js/materialize.js' %}"></script>
+  <script src="{% static 'plugins/my/js/init.js' %}"></script>
+
+  </body>
+</html>
